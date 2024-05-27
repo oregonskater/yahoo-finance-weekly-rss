@@ -35,6 +35,7 @@ def update_rss_feed():
         print(f"RSS feed updated with article: {title}")
     else:
         print("No new article found.")
+        open('yahoo_finance_weekly_article.xml', 'w').close()  # Create an empty file if no article found
 
 if __name__ == "__main__":
     update_rss_feed()
