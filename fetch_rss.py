@@ -35,7 +35,6 @@ def update_rss_feed():
         print(f"RSS feed updated with article: {title}")
     else:
         print("No new article found.")
-        # Ensure the file is created even if no article is found
         with open('yahoo_finance_weekly_article.xml', 'w') as f:
             f.write('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Yahoo Finance Weekly Article</title><link>https://finance.yahoo.com/news/</link><description>RSS feed for Yahoo Finance weekly article.</description></channel></rss>')
 
