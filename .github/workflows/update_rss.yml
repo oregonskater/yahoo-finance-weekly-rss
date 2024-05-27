@@ -28,15 +28,16 @@ jobs:
         python fetch_rss.py
 
     - name: Commit and push changes
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/${{ github.repository }}.git
         if [ -f yahoo_finance_weekly_article.xml ]; then
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add yahoo_finance_weekly_article.xml
           git commit -m 'Update RSS feed'
           git push
         else
           echo "RSS feed file does not exist. Skipping commit."
         fi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
