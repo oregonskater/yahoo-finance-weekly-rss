@@ -8,7 +8,7 @@ def fetch_latest_article():
     response = requests.get(page_url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    articles = soup.find_all('a', href=True)
+    articles = soup.find_all('a', {'class': 'js-content-viewer'})
 
     for article in articles:
         title = article.get_text()
