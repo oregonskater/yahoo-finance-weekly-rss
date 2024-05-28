@@ -8,9 +8,10 @@ def fetch_latest_article():
     response = requests.get(page_url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    articles = soup.find_all('a', {'class': 'Fw(b)'})
+    articles = soup.find_all('a', href=True)
+
     for article in articles:
-        title = article.text
+        title = article.get_text()
         if "what to know this week" in title.lower():
             link = base_url + article['href']
             return title, link
